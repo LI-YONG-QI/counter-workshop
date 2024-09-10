@@ -1,7 +1,7 @@
 use super::utils::{deploy_contract, Accounts};
 use openzeppelin::access::ownable::interface::{IOwnableDispatcher, IOwnableDispatcherTrait};
 use snforge_std::{start_cheat_caller_address, stop_cheat_caller_address};
-use starknet::info::get_caller_address;
+use starknet::get_caller_address;
 
 #[test]
 fn check_constructor_initial_owner() {
@@ -25,7 +25,6 @@ fn check_transfer_ownership_as_owner() {
     dispatcher.transfer_ownership(Accounts::NEW_OWNER());
     let current_owner = dispatcher.owner();
 
-   
     assert!(current_owner == Accounts::NEW_OWNER(), "Owner not changed");
     stop_cheat_caller_address(contract_address);
 }
